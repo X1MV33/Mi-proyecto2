@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Boda Valeria y Andrés</title>
+  <meta name="description" content="Valeria y Andrés se casan el 15 de mayo de 2027. ¡Acompáñanos!" />
+  <meta name="theme-color" content="#2f4a3e" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bloqueado">
+
+  <!-- Ramas dibujadas que se reutilizan en la página -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="rama" viewBox="0 0 200 200">
+      <path d="M8 196 C 50 150, 100 100, 192 8" fill="none" stroke="currentColor" stroke-width="1.6" />
+      <g fill="currentColor">
+        <ellipse cx="14" cy="0" rx="15" ry="5.5" transform="translate(38 162) rotate(-80)" />
+        <ellipse cx="14" cy="0" rx="15" ry="5.5" transform="translate(44 158) rotate(10)" />
+        <ellipse cx="14" cy="0" rx="16" ry="6" transform="translate(70 130) rotate(-85)" />
+        <ellipse cx="14" cy="0" rx="16" ry="6" transform="translate(76 126) rotate(5)" />
+        <ellipse cx="14" cy="0" rx="17" ry="6" transform="translate(103 98) rotate(-88)" />
+        <ellipse cx="14" cy="0" rx="17" ry="6" transform="translate(109 94) rotate(0)" />
+        <ellipse cx="14" cy="0" rx="15" ry="5.5" transform="translate(136 66) rotate(-90)" />
+        <ellipse cx="14" cy="0" rx="15" ry="5.5" transform="translate(142 62) rotate(-4)" />
+        <ellipse cx="12" cy="0" rx="13" ry="5" transform="translate(166 36) rotate(-92)" />
+        <ellipse cx="12" cy="0" rx="13" ry="5" transform="translate(171 32) rotate(-8)" />
+        <ellipse cx="10" cy="0" rx="11" ry="4.5" transform="translate(186 12) rotate(-45)" />
+      </g>
+    </symbol>
+    <symbol id="divisor" viewBox="0 0 240 24">
+      <path d="M0 12 H96 M144 12 H240" stroke="currentColor" stroke-width="1" />
+      <g fill="currentColor">
+        <ellipse cx="108" cy="12" rx="10" ry="4" transform="rotate(-25 108 12)" />
+        <ellipse cx="132" cy="12" rx="10" ry="4" transform="rotate(25 132 12)" />
+        <circle cx="120" cy="12" r="3.5" />
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- ===== Sobre con sello de cera ===== -->
+  <div id="intro" class="intro">
+    <p class="intro-eyebrow">Tienes una invitación</p>
+    <div class="sobre" id="sobre">
+      <div class="carta">
+        <span class="carta-nombres">Valeria &amp; Andrés</span>
+        <span class="carta-fecha">15 · 05 · 2027</span>
+      </div>
+      <div class="frente"></div>
+      <div class="solapa"></div>
+      <button class="sello" id="sello" aria-label="Abrir invitación">V&amp;A</button>
+    </div>
+    <p class="intro-pista">Toca el sello para abrir</p>
+    <small class="intro-nota">Con música · sube el volumen</small>
+  </div>
+
+  <canvas id="petalos" aria-hidden="true"></canvas>
+
+  <button id="musica" class="musica" aria-label="Pausar o reproducir música">
+    <span class="nota">♪</span>
+  </button>
+
+  <main>
+    <!-- ===== Portada ===== -->
+    <header class="hero">
+      <svg class="rama rama-ti" aria-hidden="true"><use href="#rama" /></svg>
+      <svg class="rama rama-bd" aria-hidden="true"><use href="#rama" /></svg>
+      <div class="hero-contenido">
+        <p class="eyebrow aparece">Nos casamos</p>
+        <h1 class="nombres aparece">
+          <span>Valeria</span>
+          <span class="amp">&amp;</span>
+          <span>Andrés</span>
+        </h1>
+        <p class="hero-fecha aparece">Sábado <strong>15 de mayo de 2027</strong></p>
+        <p class="hero-lugar aparece">Tequisquiapan, Querétaro</p>
+        <p class="para-quien aparece" id="para-quien" hidden>Esta invitación es para <strong id="invitado"></strong></p>
+      </div>
+      <a href="#cuenta" class="bajar" aria-label="Ver más">
+        <span>Desliza</span>
+        <i></i>
+      </a>
+    </header>
+
+    <!-- ===== Frase y familias ===== -->
+    <section class="seccion frase">
+      <svg class="divisor" aria-hidden="true"><use href="#divisor" /></svg>
+      <blockquote class="reveal">
+        “El amor es paciente, es bondadoso.<br />Todo lo cree, todo lo espera, todo lo soporta.”
+        <cite>1 Corintios 13</cite>
+      </blockquote>
+      <p class="reveal intro-familias">Con la bendición de Dios y de nuestros padres</p>
+      <div class="familias reveal">
+        <div>
+          <h3>Padres de la novia</h3>
+          <p>Laura Méndez Ríos<br />Jorge Herrera Salas</p>
+        </div>
+        <div>
+          <h3>Padres del novio</h3>
+          <p>Patricia Ochoa Lara<br />Ricardo Fuentes Vidal</p>
+        </div>
+        <div>
+          <h3>Padrinos de velación</h3>
+          <p>Mariana y Luis Castañeda</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Cuenta regresiva ===== -->
+    <section id="cuenta" class="seccion cuenta-seccion">
+      <p class="eyebrow claro">Falta muy poco</p>
+      <h2 class="titulo claro">Contando los días</h2>
+      <div class="cuenta" id="cuenta-reg">
+        <div><b id="dias">000</b><small>días</small></div>
+        <div><b id="horas">00</b><small>horas</small></div>
+        <div><b id="minutos">00</b><small>minutos</small></div>
+        <div><b id="segundos">00</b><small>segundos</small></div>
+      </div>
+      <a class="boton boton-claro" target="_blank" rel="noopener" id="calendario" href="#">Agregar a mi calendario</a>
+    </section>
+
+    <!-- ===== Nuestra historia ===== -->
+    <section class="seccion">
+      <p class="eyebrow">Cómo empezó todo</p>
+      <h2 class="titulo">Nuestra historia</h2>
+      <ol class="historia">
+        <li class="reveal"><span class="anio">2019</span><div><h3>Nos conocimos</h3><p>En la boda de una amiga en común. Andrés pisó a Valeria tres veces bailando y aun así ella le dio su número.</p></div></li>
+        <li class="reveal"><span class="anio">2021</span><div><h3>Primer viaje juntos</h3><p>Oaxaca, mucho mole y una lluvia que nos dejó empapados en Monte Albán.</p></div></li>
+        <li class="reveal"><span class="anio">2023</span><div><h3>Nuestro hogar</h3><p>Nos mudamos juntos con Canela, nuestra perrita, que hoy es la jefa de la casa.</p></div></li>
+        <li class="reveal"><span class="anio">2025</span><div><h3>¡Dijo que sí!</h3><p>Al atardecer, en el mismo lugar donde nos conocimos.</p></div></li>
+        <li class="reveal"><span class="anio">2027</span><div><h3>Nuestra boda</h3><p>Y queremos que estés ahí para celebrarlo.</p></div></li>
+      </ol>
+    </section>
+
+    <!-- ===== Ceremonia y recepción ===== -->
+    <section class="seccion seccion-suave">
+      <p class="eyebrow">Dónde y cuándo</p>
+      <h2 class="titulo">El gran día</h2>
+      <div class="eventos">
+        <article class="evento reveal">
+          <div class="evento-icono" aria-hidden="true">⛪</div>
+          <h3>Ceremonia religiosa</h3>
+          <p class="hora">5:00 pm</p>
+          <p><strong>Parroquia de Santa María de la Asunción</strong><br />Plaza Miguel Hidalgo s/n, Centro<br />Tequisquiapan, Qro.</p>
+          <a class="boton" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Parroquia+Santa+Maria+de+la+Asuncion+Tequisquiapan">Cómo llegar</a>
+        </article>
+        <article class="evento reveal">
+          <div class="evento-icono" aria-hidden="true">🥂</div>
+          <h3>Recepción</h3>
+          <p class="hora">7:00 pm</p>
+          <p><strong>Hacienda Los Olivos</strong><br />Carretera a Ezequiel Montes km 4.5<br />Tequisquiapan, Qro.</p>
+          <a class="boton" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Hacienda+Tequisquiapan">Cómo llegar</a>
+        </article>
+      </div>
+
+      <h3 class="subtitulo reveal">Itinerario</h3>
+      <ol class="itinerario reveal">
+        <li><time>17:00</time><span>Ceremonia</span></li>
+        <li><time>18:30</time><span>Cóctel de bienvenida</span></li>
+        <li><time>19:30</time><span>Entrada de los novios y cena</span></li>
+        <li><time>21:00</time><span>Primer baile</span></li>
+        <li><time>21:30</time><span>¡Fiesta!</span></li>
+        <li><time>02:00</time><span>Tornaboda</span></li>
+      </ol>
+    </section>
+
+    <!-- ===== Código de vestimenta ===== -->
+    <section class="seccion">
+      <p class="eyebrow">Qué ponerte</p>
+      <h2 class="titulo">Código de vestimenta</h2>
+      <div class="vestimenta reveal">
+        <div class="vest-tipo">
+          <span aria-hidden="true">🤵‍♂️ 👗</span>
+          <h3>Formal</h3>
+          <p>Traje oscuro para ellos, vestido largo o de cóctel para ellas.</p>
+        </div>
+        <div class="vest-colores">
+          <p>Colores sugeridos</p>
+          <ul class="muestras" aria-label="Colores sugeridos">
+            <li style="--c:#8fa892" title="Salvia"></li>
+            <li style="--c:#2f4a3e" title="Eucalipto"></li>
+            <li style="--c:#d9b3aa" title="Rosa palo"></li>
+            <li style="--c:#b8955a" title="Dorado"></li>
+            <li style="--c:#7f8fa6" title="Azul niebla"></li>
+          </ul>
+          <small>El blanco y sus tonos están reservados para la novia.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Galería 3D ===== -->
+    <section class="seccion seccion-suave galeria-seccion">
+      <p class="eyebrow">Momentos</p>
+      <h2 class="titulo">Nuestra galería</h2>
+      <div class="galeria" id="galeria" tabindex="0" aria-label="Galería de fotos, usa las flechas para cambiar">
+        <div class="galeria-escena" id="galeria-escena"></div>
+      </div>
+      <div class="galeria-controles">
+        <button type="button" id="ant" aria-label="Foto anterior">‹</button>
+        <div class="puntos" id="puntos"></div>
+        <button type="button" id="sig" aria-label="Foto siguiente">›</button>
+      </div>
+    </section>
+
+    <!-- ===== Regalos ===== -->
+    <section class="seccion">
+      <p class="eyebrow">Mesa de regalos</p>
+      <h2 class="titulo">Tu presencia es nuestro mejor regalo</h2>
+      <p class="texto-centrado reveal">Si además deseas tener un detalle con nosotros, te dejamos estas opciones.</p>
+      <div class="regalos">
+        <article class="regalo reveal">
+          <div class="evento-icono" aria-hidden="true">🎁</div>
+          <h3>Liverpool</h3>
+          <p>Número de evento</p>
+          <p class="dato" id="dato-evento">51234567</p>
+          <button type="button" class="copiar" data-copiar="dato-evento">Copiar número</button>
+        </article>
+        <article class="regalo reveal">
+          <div class="evento-icono" aria-hidden="true">💌</div>
+          <h3>Lluvia de sobres</h3>
+          <p>El día del evento habrá un buzón en la recepción para tus sobres.</p>
+        </article>
+        <article class="regalo reveal">
+          <div class="evento-icono" aria-hidden="true">🏦</div>
+          <h3>Transferencia</h3>
+          <p>Valeria Herrera Méndez<br />Banco Ejemplo · CLABE</p>
+          <p class="dato" id="dato-clabe">0123 4567 8901 2345 67</p>
+          <button type="button" class="copiar" data-copiar="dato-clabe">Copiar CLABE</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Hospedaje e información ===== -->
+    <section class="seccion seccion-suave">
+      <p class="eyebrow">Si vienes de fuera</p>
+      <h2 class="titulo">Hospedaje</h2>
+      <div class="hoteles">
+        <article class="hotel reveal">
+          <h3>Hotel Boutique La Granada</h3>
+          <p>A 5 minutos de la parroquia. Menciona el código <strong>BODAVA</strong> para 15% de descuento.</p>
+          <a class="enlace" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=hotel+Tequisquiapan+centro">Ver ubicación →</a>
+        </article>
+        <article class="hotel reveal">
+          <h3>Hotel Hacienda Los Olivos</h3>
+          <p>Dentro del lugar de la recepción. Habitaciones limitadas, reserva antes del 1 de abril.</p>
+          <a class="enlace" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Hacienda+Tequisquiapan">Ver ubicación →</a>
+        </article>
+      </div>
+      <ul class="avisos reveal">
+        <li><span aria-hidden="true">🥂</span> Celebración solo para adultos. ¡Gracias por entenderlo!</li>
+        <li><span aria-hidden="true">🚌</span> Habrá transporte de la parroquia a la hacienda a las 6:15 pm.</li>
+        <li><span aria-hidden="true">📸</span> Comparte tus fotos con el hashtag <button type="button" class="hashtag copiar" data-copiar="hashtag" id="hashtag">#ValeYAndres2027</button></li>
+      </ul>
+    </section>
+
+    <!-- ===== Confirmación ===== -->
+    <section id="confirmar" class="seccion confirmar-seccion">
+      <svg class="rama rama-conf" aria-hidden="true"><use href="#rama" /></svg>
+      <p class="eyebrow claro">RSVP</p>
+      <h2 class="titulo claro">Confirma tu asistencia</h2>
+      <p class="limite">Por favor confírmanos antes del <strong>15 de abril de 2027</strong></p>
+      <form id="rsvp" class="rsvp reveal" novalidate>
+        <label for="rsvp-nombre">Nombre completo</label>
+        <input id="rsvp-nombre" name="nombre" type="text" autocomplete="name" placeholder="Como aparece en tu invitación" required />
+
+        <fieldset>
+          <legend>¿Nos acompañas?</legend>
+          <div class="opciones">
+            <input type="radio" id="rsvp-si" name="asiste" value="si" checked />
+            <label for="rsvp-si">Sí, ahí estaré</label>
+            <input type="radio" id="rsvp-no" name="asiste" value="no" />
+            <label for="rsvp-no">No podré ir</label>
+          </div>
+        </fieldset>
+
+        <div id="bloque-pases">
+          <label for="rsvp-pases">Número de personas</label>
+          <select id="rsvp-pases" name="pases">
+            <option value="1">1 persona</option>
+            <option value="2" selected>2 personas</option>
+            <option value="3">3 personas</option>
+            <option value="4">4 personas</option>
+          </select>
+        </div>
+
+        <label for="rsvp-mensaje">Mensaje para los novios <span class="opcional">(opcional)</span></label>
+        <textarea id="rsvp-mensaje" name="mensaje" rows="3" placeholder="Unas palabras para Valeria y Andrés"></textarea>
+
+        <button type="submit" class="boton boton-dorado">Enviar confirmación</button>
+        <div class="msg" id="msg" role="status"></div>
+      </form>
+    </section>
+
+    <footer class="pie">
+      <svg class="divisor" aria-hidden="true"><use href="#divisor" /></svg>
+      <p class="pie-nombres">Valeria &amp; Andrés</p>
+      <p>15 · 05 · 2027</p>
+      <small>¡Te esperamos con mucho cariño!</small>
+    </footer>
+  </main>
+
+  <div class="aviso-copia" id="aviso-copia" role="status" hidden>Copiado</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+Pon aquí su canción (por ejemplo cancion.mp3) y escriban la ruta en boda/script.js:
+  musica: "musica/cancion.mp3",
+Si no ponen ninguna, la invitación toca un vals suave generado automáticamente.
