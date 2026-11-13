@@ -1,0 +1,3 @@
+Pon aquí tu canción (por ejemplo cancion.mp3) y escribe su ruta en script.js:
+  musica: "musica/cancion.mp3",
+Si no pones ninguna, la invitación toca una melodía alegre generada automáticamente.

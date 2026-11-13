@@ -3,158 +3,135 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Festival Vibra 2027</title>
-  <meta name="description" content="Festival Vibra 2027: música, arte y comida en un solo lugar. ¡Confirma tu asistencia!" />
+  <title>Festival Vibra · Invitación</title>
+  <meta name="description" content="¡Estás invitad@ al Festival Vibra! Sábado 20 de marzo de 2027." />
+  <meta name="theme-color" content="#2a0b4d" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Pacifico&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <!-- Navegación -->
-  <header class="nav">
-    <a href="#inicio" class="logo">Vibra<span>2027</span></a>
-    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
-    <nav class="nav-links">
-      <a href="#acerca">Acerca</a>
-      <a href="#agenda">Agenda</a>
-      <a href="#lugar">Lugar</a>
-      <a href="#faq">Preguntas</a>
-      <a href="#rsvp" class="btn btn-small">Confirmar</a>
-    </nav>
-  </header>
+<body class="bloqueado">
 
-  <!-- Portada -->
-  <section id="inicio" class="hero">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <div class="hero-content">
-      <p class="tag">🎉 Sábado 20 de marzo de 2027</p>
-      <h1>Festival <span class="script">Vibra</span></h1>
-      <p class="subtitle">Música en vivo, arte, comida y buena energía. ¡Un día para celebrar juntos!</p>
-
-      <div class="countdown" id="countdown" aria-live="polite">
-        <div><span id="dias">00</span><small>Días</small></div>
-        <div><span id="horas">00</span><small>Horas</small></div>
-        <div><span id="minutos">00</span><small>Min</small></div>
-        <div><span id="segundos">00</span><small>Seg</small></div>
-      </div>
-
-      <div class="hero-buttons">
-        <a href="#rsvp" class="btn">¡Quiero ir!</a>
-        <a href="#agenda" class="btn btn-outline">Ver agenda</a>
-      </div>
+  <!-- ===== Pantalla de entrada: sobre que se abre ===== -->
+  <div id="intro" class="intro">
+    <p class="intro-texto">Tienes una invitación 💌</p>
+    <div class="sobre" id="sobre" role="button" tabindex="0" aria-label="Abrir invitación">
+      <div class="carta"><span>20·03·27</span></div>
+      <div class="frente"></div>
+      <div class="solapa"></div>
+      <div class="sello">💖</div>
     </div>
-  </section>
+    <button class="btn" id="abrir">Abrir invitación ✨</button>
+    <small class="intro-nota">🔊 Sube el volumen</small>
+  </div>
 
-  <!-- Acerca -->
-  <section id="acerca" class="section">
-    <h2 class="title">¿Qué es <span>Vibra</span>?</h2>
-    <p class="lead">Un festival al aire libre lleno de color donde se juntan artistas locales, food trucks y actividades para todas las edades.</p>
-    <div class="cards">
-      <article class="card c-pink reveal">
-        <div class="icon">🎶</div>
-        <h3>Música en vivo</h3>
-        <p>Bandas y DJs en dos escenarios durante todo el día.</p>
-      </article>
-      <article class="card c-orange reveal">
-        <div class="icon">🎨</div>
-        <h3>Arte y talleres</h3>
-        <p>Murales en vivo, pintura facial y talleres creativos.</p>
-      </article>
-      <article class="card c-teal reveal">
-        <div class="icon">🌮</div>
-        <h3>Comida y bebida</h3>
-        <p>Más de 15 puestos con sabores para todos los gustos.</p>
-      </article>
-      <article class="card c-purple reveal">
-        <div class="icon">🎁</div>
-        <h3>Sorpresas</h3>
-        <p>Rifas, juegos y premios a lo largo del evento.</p>
-      </article>
-    </div>
-  </section>
+  <!-- Fondo 3D -->
+  <canvas id="fondo3d" aria-hidden="true"></canvas>
+  <div id="flotantes" aria-hidden="true"></div>
 
-  <!-- Agenda -->
-  <section id="agenda" class="section section-alt">
-    <h2 class="title">Agenda del <span>día</span></h2>
-    <ol class="timeline">
-      <li class="reveal"><time>12:00</time><div><h3>Apertura de puertas</h3><p>Bienvenida, registro y entrega de pulseras.</p></div></li>
-      <li class="reveal"><time>13:00</time><div><h3>Talleres de arte</h3><p>Zona creativa abierta para todas las edades.</p></div></li>
-      <li class="reveal"><time>15:00</time><div><h3>Bandas locales</h3><p>Escenario principal con artistas invitados.</p></div></li>
-      <li class="reveal"><time>18:00</time><div><h3>Rifa y premios</h3><p>¡Ten a la mano tu boleto!</p></div></li>
-      <li class="reveal"><time>20:00</time><div><h3>Show estelar + DJ</h3><p>Cerramos la noche bailando hasta las 23:00.</p></div></li>
-    </ol>
-  </section>
+  <!-- Botón de música -->
+  <button id="musica" class="musica" aria-label="Pausar o reproducir música">
+    <span class="eq"><i></i><i></i><i></i><i></i></span>
+  </button>
 
-  <!-- Lugar -->
-  <section id="lugar" class="section">
-    <h2 class="title">¿Dónde <span>será</span>?</h2>
-    <div class="place">
-      <div class="place-info reveal">
-        <h3>📍 Parque Central</h3>
-        <p>Av. Principal 123, Centro, Tu Ciudad</p>
-        <ul>
-          <li>🚗 Estacionamiento gratuito</li>
-          <li>🚌 Rutas de transporte público cercanas</li>
-          <li>♿ Acceso para sillas de ruedas</li>
-          <li>🐶 Se permiten mascotas con correa</li>
-        </ul>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Parque+Central">Abrir en Google Maps</a>
-      </div>
-      <div class="map reveal">
-        <iframe title="Mapa del lugar" loading="lazy"
-          src="https://www.google.com/maps?q=Parque+Central&output=embed"></iframe>
+  <main>
+    <!-- ===== Portada ===== -->
+    <section class="hero">
+      <p class="pre reveal">Te invitamos al</p>
+      <h1 class="titulo3d" data-ola>FESTIVAL</h1>
+      <p class="neon">Vibra</p>
+      <p class="chips reveal">
+        <span>🎶 Música</span><span>💃 Baile</span><span>🎁 Sorpresas</span>
+      </p>
+      <a href="#cuenta" class="bajar" aria-label="Ver más">⌄</a>
+    </section>
+
+    <!-- Banda que se mueve -->
+    <div class="banda" aria-hidden="true">
+      <div class="banda-track">
+        <span>★ 20 · MARZO · 2027 ★ ¡NO FALTES! ★ FESTIVAL VIBRA ★ 20 · MARZO · 2027 ★ ¡NO FALTES! ★ FESTIVAL VIBRA&nbsp;</span>
+        <span>★ 20 · MARZO · 2027 ★ ¡NO FALTES! ★ FESTIVAL VIBRA ★ 20 · MARZO · 2027 ★ ¡NO FALTES! ★ FESTIVAL VIBRA&nbsp;</span>
       </div>
     </div>
-  </section>
 
-  <!-- RSVP -->
-  <section id="rsvp" class="section section-rsvp">
-    <h2 class="title light">Confirma tu <span>asistencia</span></h2>
-    <form id="rsvp-form" class="rsvp-form reveal" novalidate>
-      <label>Nombre completo
-        <input type="text" name="nombre" required placeholder="Tu nombre" />
-      </label>
-      <label>Correo electrónico
-        <input type="email" name="correo" required placeholder="tucorreo@ejemplo.com" />
-      </label>
-      <label>¿Cuántas personas vienen?
-        <select name="personas">
-          <option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option>
-        </select>
-      </label>
-      <label>Mensaje (opcional)
-        <textarea name="mensaje" rows="3" placeholder="¿Algo que debamos saber?"></textarea>
-      </label>
-      <button type="submit" class="btn btn-big">¡Confirmar! 🎉</button>
-      <p class="form-msg" id="form-msg" role="status"></p>
-    </form>
-  </section>
+    <!-- ===== Cuenta regresiva ===== -->
+    <section id="cuenta" class="seccion">
+      <h2 class="titulo-seccion reveal">Faltan</h2>
+      <div class="cuenta" id="cuenta-reg">
+        <div class="cubo reveal"><b id="dias">00</b><small>días</small></div>
+        <div class="cubo reveal"><b id="horas">00</b><small>horas</small></div>
+        <div class="cubo reveal"><b id="minutos">00</b><small>min</small></div>
+        <div class="cubo reveal"><b id="segundos">00</b><small>seg</small></div>
+      </div>
+    </section>
 
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <h2 class="title">Preguntas <span>frecuentes</span></h2>
-    <div class="faq">
-      <details><summary>¿Cuánto cuesta la entrada?</summary><p>La entrada es gratuita, solo necesitas confirmar tu asistencia.</p></details>
-      <details><summary>¿Pueden ir niños?</summary><p>¡Claro! Habrá zona infantil y actividades para toda la familia.</p></details>
-      <details><summary>¿Qué pasa si llueve?</summary><p>Contamos con carpas techadas; el evento se realiza con lluvia o sol.</p></details>
-      <details><summary>¿Puedo llevar comida?</summary><p>Puedes llevar agua y snacks; también habrá muchos puestos de comida.</p></details>
-    </div>
-  </section>
+    <!-- ===== Detalles ===== -->
+    <section class="seccion">
+      <h2 class="titulo-seccion reveal">¿Cuándo y dónde?</h2>
+      <div class="detalles">
+        <article class="tarjeta tilt reveal">
+          <div class="emoji">📅</div>
+          <h3>Fecha</h3>
+          <p>Sábado<br /><strong>20 de marzo, 2027</strong></p>
+        </article>
+        <article class="tarjeta tilt reveal">
+          <div class="emoji">⏰</div>
+          <h3>Hora</h3>
+          <p>A partir de las<br /><strong>7:00 pm</strong></p>
+        </article>
+        <article class="tarjeta tilt reveal">
+          <div class="emoji">📍</div>
+          <h3>Lugar</h3>
+          <p><strong>Parque Central</strong><br />Av. Principal 123, Tu Ciudad</p>
+          <a class="btn btn-mini" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/search/?api=1&query=Parque+Central">Cómo llegar</a>
+        </article>
+      </div>
+      <p class="vestimenta reveal">👗 Código de vestimenta: <strong>¡Lo más colorido que tengas!</strong></p>
+    </section>
 
-  <footer class="footer">
-    <p class="logo">Vibra<span>2027</span></p>
-    <p>¿Dudas? Escríbenos a <a href="mailto:hola@festivalvibra.com">hola@festivalvibra.com</a></p>
-    <div class="social">
-      <a href="#" aria-label="Instagram">📸</a>
-      <a href="#" aria-label="Facebook">👍</a>
-      <a href="#" aria-label="TikTok">🎵</a>
-    </div>
-    <small>© 2027 Festival Vibra. Hecho con 💜</small>
-  </footer>
+    <!-- ===== Carril de fotos ===== -->
+    <section class="seccion fotos-seccion">
+      <h2 class="titulo-seccion reveal">Momentos ✨</h2>
+      <div class="carril"><div class="carril-track" id="carril1"></div></div>
+      <div class="carril reverso"><div class="carril-track" id="carril2"></div></div>
+      <p class="pista">Toca una foto para verla en grande</p>
+    </section>
 
+    <!-- ===== Confirmación ===== -->
+    <section id="confirmar" class="seccion">
+      <h2 class="titulo-seccion reveal">¿Vienes?</h2>
+      <form id="rsvp" class="rsvp tilt-suave reveal" novalidate>
+        <label>Tu nombre
+          <input type="text" name="nombre" required placeholder="Escribe tu nombre" autocomplete="name" />
+        </label>
+        <label>¿Cuántos vienen?
+          <div class="contador">
+            <button type="button" data-paso="-1" aria-label="Menos">−</button>
+            <output name="personas" id="personas">1</output>
+            <button type="button" data-paso="1" aria-label="Más">+</button>
+          </div>
+        </label>
+        <button type="submit" class="btn btn-grande">¡Sí, ahí estaré! 🎉</button>
+        <p class="msg" id="msg" role="status"></p>
+      </form>
+    </section>
+
+    <footer class="pie">
+      <p class="titulo3d chico" data-ola>¡TE ESPERAMOS!</p>
+      <small>Festival Vibra 2027 · Hecho con 💜</small>
+    </footer>
+  </main>
+
+  <!-- Visor de fotos -->
+  <div id="visor" class="visor" hidden>
+    <button class="cerrar" aria-label="Cerrar">✕</button>
+    <img alt="" />
+    <p></p>
+  </div>
+
+  <script src="lib/three.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
