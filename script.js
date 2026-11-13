@@ -288,7 +288,12 @@ form.addEventListener("submit", (e) => {
   confeti(200);
   if (CONFIG.whatsapp) {
     const texto = `¡Hola! Soy ${nombre} y confirmo mi asistencia al Festival Vibra 🎉 Seremos ${n} persona${n > 1 ? "s" : ""}.`;
-    setTimeout(() => window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`, "_blank"), 900);
+    const a = document.createElement("a");
+    a.className = "btn btn-mini";
+    a.target = "_blank"; a.rel = "noopener";
+    a.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`;
+    a.textContent = "Enviar confirmación por WhatsApp";
+    msg.append(document.createElement("br"), a);
   }
 });
 
