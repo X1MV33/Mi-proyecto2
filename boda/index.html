@@ -261,8 +261,9 @@
       <h2 class="script titulo-vino">Confirma tu asistencia</h2>
       <p class="texto-claro">Por favor llena este formulario antes del <strong>15 de abril de 2027</strong>. Nos ayudará a organizar todo.</p>
       <form id="rsvp" class="rsvp" novalidate>
-        <label for="rsvp-nombre">Tu nombre y apellido</label>
-        <input id="rsvp-nombre" name="nombre" type="text" autocomplete="name" required />
+        <label for="rsvp-nombre">Tu nombre y apellido <span class="obligatorio" aria-hidden="true">*</span></label>
+        <input id="rsvp-nombre" name="nombre" type="text" autocomplete="name" required aria-required="true" aria-describedby="error-nombre" />
+        <p class="error-campo" id="error-nombre" role="alert" hidden>Escribe tu nombre y apellido para que sepamos quién confirma.</p>
 
         <fieldset>
           <legend>¿Podrás acompañarnos?</legend>

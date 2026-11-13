@@ -187,14 +187,21 @@ $$(".copiar").forEach((b) =>
 /* ---------- Confirmación ---------- */
 const form = $("#rsvp");
 form.addEventListener("change", () => ($("#bloque-si").hidden = form.asiste.value === "no"));
+form.nombre.addEventListener("input", () => {
+  if (!form.nombre.value.trim()) return;
+  form.nombre.classList.remove("invalido");
+  form.nombre.removeAttribute("aria-invalid");
+  $("#error-nombre").hidden = true;
+});
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const msg = $("#msg");
   const nombre = form.nombre.value.trim();
   form.nombre.classList.toggle("invalido", !nombre);
+  form.nombre.setAttribute("aria-invalid", String(!nombre));
+  $("#error-nombre").hidden = !!nombre;
   if (!nombre) {
-    msg.className = "msg error";
-    msg.textContent = "Escribe tu nombre para poder confirmar.";
+    msg.className = "msg"; msg.textContent = "";
     form.nombre.focus();
     return;
   }
@@ -206,6 +213,7 @@ form.addEventListener("submit", (e) => {
   msg.textContent = asiste
     ? `¡Gracias, ${nombre.split(" ")[0]}! Nos hace muy felices que nos acompañes.`
     : `Gracias por avisarnos, ${nombre.split(" ")[0]}. Te vamos a extrañar.`;
+  msg.tabIndex = -1; msg.focus({ preventScroll: true });
   if (asiste) Petalos.rafaga(80);
   if (CONFIG.whatsapp) {
     const texto = asiste
@@ -269,8 +277,6 @@ const Petalos = (() => {
   ajustar();
   addEventListener("resize", ajustar);
   if (!pocoMovimiento) {
-    const base = innerWidth < 700 ? 16 : 28;
-    for (let i = 0; i < base; i++) lista.push(Object.assign(nuevo(false), { fijo: true }));
     cuadro();
   }
   return { rafaga: (n) => { if (!pocoMovimiento) for (let i = 0; i < n; i++) lista.push(Object.assign(nuevo(), { vy: azar(1.2, 2.6) * dpr })); } };
