@@ -21,10 +21,6 @@ const CONFIG = {
   // Canción propia (ej. "musica/cancion.mp3"). Vacío = vals suave generado por la página.
   musica: "",
 
-  fotos: [
-    "fotos/foto1.svg", "fotos/foto2.svg", "fotos/foto3.svg", "fotos/foto4.svg",
-    "fotos/foto5.svg", "fotos/foto6.svg", "fotos/foto7.svg", "fotos/foto8.svg",
-  ],
 };
 /* ========================================================= */
 
@@ -161,57 +157,6 @@ cuenta();
   $("#calendario").href = `https://calendar.google.com/calendar/render?${p}`;
 })();
 
-/* ---------- Galería 3D ---------- */
-const Galeria = (() => {
-  const escena = $("#galeria-escena"), puntos = $("#puntos");
-  let actual = 0, auto;
-  const fotos = CONFIG.fotos.map((src, i) => {
-    const b = document.createElement("button");
-    b.type = "button"; b.className = "foto";
-    b.setAttribute("aria-label", `Foto ${i + 1}`);
-    b.innerHTML = `<img src="${src}" alt="Foto ${i + 1} de los novios" loading="lazy" />`;
-    b.addEventListener("click", () => ir(i));
-    escena.appendChild(b);
-    const p = document.createElement("button");
-    p.type = "button"; p.setAttribute("aria-label", `Ir a la foto ${i + 1}`);
-    p.addEventListener("click", () => ir(i));
-    puntos.appendChild(p);
-    return b;
-  });
-  const n = fotos.length;
-  function pintar() {
-    fotos.forEach((f, i) => {
-      let d = i - actual;
-      if (d > n / 2) d -= n;
-      if (d < -n / 2) d += n;
-      const a = Math.abs(d);
-      f.style.transform = `translate(-50%, -50%) translateX(${d * 58}%) translateZ(${-a * 180}px) rotateY(${-d * 32}deg)`;
-      f.style.opacity = a > 2 ? 0 : 1 - a * 0.18;
-      f.style.filter = a ? `brightness(${1 - a * 0.12})` : "none";
-      f.style.zIndex = 10 - a;
-      f.style.pointerEvents = a > 2 ? "none" : "auto";
-      f.tabIndex = a === 0 ? 0 : -1;
-    });
-    puntos.querySelectorAll("button").forEach((p, i) => p.setAttribute("aria-current", i === actual));
-  }
-  function ir(i) { actual = (i + n) % n; pintar(); reiniciar(); }
-  function reiniciar() { clearInterval(auto); if (!pocoMovimiento) auto = setInterval(() => { actual = (actual + 1) % n; pintar(); }, 4200); }
-  $("#ant").addEventListener("click", () => ir(actual - 1));
-  $("#sig").addEventListener("click", () => ir(actual + 1));
-  $("#galeria").addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") ir(actual - 1);
-    if (e.key === "ArrowRight") ir(actual + 1);
-  });
-  let x0 = null;
-  $("#galeria").addEventListener("pointerdown", (e) => (x0 = e.clientX));
-  window.addEventListener("pointerup", (e) => {
-    if (x0 === null) return;
-    const dx = e.clientX - x0; x0 = null;
-    if (Math.abs(dx) > 40) ir(actual + (dx < 0 ? 1 : -1));
-  });
-  pintar(); reiniciar();
-})();
-
 /* ---------- Aparecer al hacer scroll ---------- */
 const obs = new IntersectionObserver(
   (es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } }),
@@ -241,7 +186,7 @@ $$(".copiar").forEach((b) =>
 
 /* ---------- Confirmación ---------- */
 const form = $("#rsvp");
-form.addEventListener("change", () => ($("#bloque-pases").hidden = form.asiste.value === "no"));
+form.addEventListener("change", () => ($("#bloque-si").hidden = form.asiste.value === "no"));
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const msg = $("#msg");
@@ -256,6 +201,7 @@ form.addEventListener("submit", (e) => {
   const asiste = form.asiste.value === "si";
   const pases = Number(form.pases.value);
   const nota = form.mensaje.value.trim();
+  const bebidas = [...form.querySelectorAll('input[name="bebida"]:checked')].map((b) => b.value);
   msg.className = "msg ok";
   msg.textContent = asiste
     ? `¡Gracias, ${nombre.split(" ")[0]}! Nos hace muy felices que nos acompañes.`
@@ -263,7 +209,7 @@ form.addEventListener("submit", (e) => {
   if (asiste) Petalos.rafaga(80);
   if (CONFIG.whatsapp) {
     const texto = asiste
-      ? `¡Hola! Soy ${nombre} y confirmo mi asistencia a la boda de Valeria y Andrés. Seremos ${pases} persona${pases > 1 ? "s" : ""}.${nota ? "\n" + nota : ""}`
+      ? `¡Hola! Soy ${nombre} y confirmo mi asistencia a la boda de Valeria y Andrés. Seremos ${pases} persona${pases > 1 ? "s" : ""}.${bebidas.length ? "\nBebidas: " + bebidas.join(", ") + "." : ""}${nota ? "\n" + nota : ""}`
       : `Hola, soy ${nombre}. Lamentablemente no podré asistir a la boda de Valeria y Andrés.${nota ? "\n" + nota : ""}`;
     const a = document.createElement("a");
     a.className = "boton"; a.target = "_blank"; a.rel = "noopener";
@@ -273,10 +219,17 @@ form.addEventListener("submit", (e) => {
   }
 });
 
+form.addEventListener("change", (e) => {
+  if (e.target.name !== "bebida" || !e.target.checked) return;
+  const nada = $("#beb-nada");
+  if (e.target === nada) form.querySelectorAll('input[name="bebida"]').forEach((b) => { if (b !== nada) b.checked = false; });
+  else nada.checked = false;
+});
+
 /* ---------- Pétalos que caen ---------- */
 const Petalos = (() => {
   const cv = $("#petalos"), cx = cv.getContext("2d");
-  const COLORES = ["#f2d7d0", "#e8c3ba", "#ffffff", "#efe2c4", "#d9b3aa"];
+  const COLORES = ["#7a1d2e", "#9c2e42", "#f4ebdd", "#e9dcc6", "#d7b0a6", "#5e1422"];
   let lista = [], w, h, dpr;
   function ajustar() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
